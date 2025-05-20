@@ -3,7 +3,8 @@
 import type { CartItem, Product } from '@/lib/types';
 import type React from 'react';
 import { createContext, useContext, useState, useEffect, useMemo } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
+const supabase = getSupabaseClient();
 
 interface CartContextType {
   cartItems: CartItem[];

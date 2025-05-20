@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 import type { PurchaseHistory, Product } from '@/lib/supabase'
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,10 +21,10 @@ export default function PurchaseHistoryPage() {
   }, [])
 
   async function fetchPurchaseHistory() {
-    const { data: { user } } = await supabase.auth.getUser()
+    const { data: { user } } = await getSupabaseClient().auth.getUser()
     if (!user) return
 
-    const { data, error } = await supabase
+    const { data, error } = await getSupabaseClient()
       .from('purchase_history')
       .select(`
         *,

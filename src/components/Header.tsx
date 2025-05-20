@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/button';
 import { PackageSearch, Menu, User } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { CartIcon } from '@/components/CartIcon';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
+
+const supabase = getSupabaseClient();
 
 const navLinks = (
   <>

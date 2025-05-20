@@ -1,4 +1,3 @@
-
 export interface Product {
   id: string;
   name: string;
@@ -12,3 +11,11 @@ export interface Product {
 export interface CartItem extends Product {
   quantity: number;
 }
+
+export type Profile = {
+  id: string;
+  full_name: string;
+  avatar_url?: string;
+  created_at: string;
+  updated_at: string;
+};

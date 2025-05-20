@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 import type { CartItem, Product } from '@/lib/supabase'
+
+const supabase = getSupabaseClient()
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState<(CartItem & { product: Product })[]>([])

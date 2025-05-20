@@ -27,9 +27,9 @@ export default function ProductsPage() {
 
   async function addProduct(e: React.FormEvent) {
     e.preventDefault()
-    const { error } = await import('@/lib/supabase').then(({ supabase }) =>
-      supabase.from('products').insert([newProduct])
-    )
+    const { getSupabaseClient } = await import('@/lib/supabase')
+    const supabase = getSupabaseClient()
+    const { error } = await supabase.from('products').insert([newProduct])
     if (error) {
       console.error('Error adding product:', error)
       return
@@ -84,8 +84,8 @@ export default function ProductsPage() {
             <input
               type="number"
               placeholder="Price"
-              value={newProduct.price}
-              onChange={(e) => setNewProduct({ ...newProduct, price: parseFloat(e.target.value) })}
+              value={isNaN(newProduct.price) ? '' : newProduct.price}
+              onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value === '' ? 0 : parseFloat(e.target.value) })}
               className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary"
             />
             <input

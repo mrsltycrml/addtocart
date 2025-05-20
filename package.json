@@ -9,7 +9,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "setup:supabase": "tsx scripts/setup-supabase.ts",
+    "update:domains": "tsx scripts/update-domains.ts",
+    "ensure:env": "tsx scripts/ensure-env.ts"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.8.0",

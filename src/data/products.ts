@@ -1,5 +1,6 @@
 import type { Product } from '@/lib/types';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
+const supabase = getSupabaseClient();
 
 export const mockProducts: Product[] = [
   {
