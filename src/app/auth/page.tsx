@@ -3,9 +3,5 @@
 import { Auth } from '@/components/Auth';
 
 export default function AuthPage() {
-  return (
-    <div className="container mx-auto py-10">
-      <Auth />
-    </div>
-  );
+  return <Auth />;
 } 
