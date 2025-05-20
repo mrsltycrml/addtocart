@@ -48,7 +48,7 @@ export default function ProductDetailPage() {
     if (typeof id === 'string') {
       (async () => {
         const foundProduct = await getProductById(id);
-        setProduct(foundProduct);
+      setProduct(foundProduct);
       })();
     }
   }, [id]);

@@ -32,9 +32,9 @@ export default function RootLayout({
         <CartProvider>
           <Header />
           <AuthGuard>
-            <main className="flex-grow container mx-auto px-4 py-8 sm:px-6 lg:px-10">
-              {children}
-            </main>
+          <main className="flex-grow container mx-auto px-4 py-8 sm:px-6 lg:px-10">
+            {children}
+          </main>
           </AuthGuard>
           <Toaster />
         </CartProvider>
