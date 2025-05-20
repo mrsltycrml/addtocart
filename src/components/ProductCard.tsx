@@ -72,11 +72,6 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <CardFooter className="p-5 border-t border-border/60 mt-auto">
         <div className="flex gap-3 w-full">
-          <Button variant="outline" asChild className="flex-1 text-base py-3 group/view">
-            <Link href={`/products/${product.id}`}>
-              <Eye className="mr-2 h-5 w-5 transition-transform duration-300 group-hover/view:rotate-[360deg]" /> View Details
-            </Link>
-          </Button>
           <Button onClick={handleAddToCart} className="flex-1 text-base py-3 bg-primary hover:bg-primary/90 group/cart">
             <ShoppingCart className="mr-2 h-5 w-5 transition-transform duration-300 group-hover/cart:scale-110" /> Add to Cart
           </Button>
