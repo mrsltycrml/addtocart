@@ -30,14 +30,6 @@ const nextConfig = {
   },
   // Ensure dependencies are properly transpiled
   transpilePackages: ['framer-motion'],
-  webpack: (config, { isServer }) => {
-    // Force framer-motion to be resolved from node_modules
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      'framer-motion': require.resolve('framer-motion'),
-    };
-    return config;
-  },
 };
 
 module.exports = nextConfig; 
