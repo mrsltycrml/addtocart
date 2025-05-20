@@ -238,22 +238,6 @@ export default function HomePage() {
                   </Link>
                 </Button>
               </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2, duration: 1 }}
-                className="mt-12 flex items-center gap-6"
-              >
-                <div className="flex -space-x-2">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className={`w-8 h-8 rounded-full border-2 border-background bg-primary/20`} />
-                  ))}
-                </div>
-                <div className="text-sm">
-                  <span className="text-primary font-bold">500+</span> satisfied customers
-                </div>
-              </motion.div>
             </motion.div>
             
             <motion.div
