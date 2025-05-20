@@ -76,9 +76,23 @@ export const mockProducts: Product[] = [
   },
 ];
 
-export const getProductById = (id: string): Product | undefined => {
-  return mockProducts.find(product => product.id === id);
-};
+// Fetch a product by ID from Supabase and map image_url to imageUrl
+export async function getProductById(id: string): Promise<Product | undefined> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('id', id)
+    .single();
+  if (error || !data) {
+    console.error('Error fetching product:', error);
+    return undefined;
+  }
+  // Map image_url to imageUrl for frontend compatibility
+  return {
+    ...data,
+    imageUrl: data.image_url,
+  };
+}
 
 export async function getAllProducts(): Promise<Product[]> {
   const { data, error } = await supabase.from('products').select('*');
@@ -86,5 +100,9 @@ export async function getAllProducts(): Promise<Product[]> {
     console.error('Error fetching products:', error);
     return [];
   }
-  return data as Product[];
+  // Map image_url to imageUrl for all products
+  return (data as any[]).map((item) => ({
+    ...item,
+    imageUrl: item.image_url,
+  }));
 }
