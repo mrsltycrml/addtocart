@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { refineSearchQuery } from '@/ai/flows/search-refinement';
 import { Loader2, Search, Sparkles } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 interface SearchInputProps {
   onSearch: (query: string) => void;
@@ -18,22 +18,10 @@ export function SearchInput({ onSearch, initialQuery = '' }: SearchInputProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   
-  const searchParams = useSearchParams();
   const router = useRouter();
-
-  // Sync input with URL query param 'q'
-  useEffect(() => {
-    const urlQuery = searchParams.get('q');
-    if (urlQuery !== null && urlQuery !== query) {
-      setQuery(urlQuery);
-      onSearch(urlQuery); // Ensure parent component is also aware of URL-driven search
-    }
-  }, [searchParams, query, onSearch]);
-
 
   const handleSearchSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    
     // Update URL immediately with current query
     const newSearchParams = new URLSearchParams(window.location.search);
     if (query.trim()) {
@@ -41,11 +29,8 @@ export function SearchInput({ onSearch, initialQuery = '' }: SearchInputProps) {
     } else {
       newSearchParams.delete('q');
     }
-    // Using router.replace to avoid adding to history stack for every typed char if we were doing live search
-    // For submit-based search, push or replace is fine. Replace is often better for search filters.
     router.replace(`${window.location.pathname}?${newSearchParams.toString()}`);
-    
-    onSearch(query.trim()); // Notify parent component
+    onSearch(query.trim());
   };
   
   const handleRefineAndSearch = async () => {
