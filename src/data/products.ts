@@ -104,6 +104,7 @@ export async function getAllProducts(): Promise<Product[]> {
   // Map image_url to imageUrl for all products
   return (data as any[]).map((item) => ({
     ...item,
-    imageUrl: item.image_url,
+    imageUrl: item.image_url || item.imageUrl || '',
+    image_url: item.image_url || item.imageUrl || '',
   }));
 }

@@ -30,9 +30,22 @@ function ProductDisplayFallback() {
 
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllProducts().then(setProducts);
+    async function loadProducts() {
+      try {
+        setLoading(true);
+        const fetchedProducts = await getAllProducts();
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error('Error loading products:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    loadProducts();
   }, []);
 
   return (

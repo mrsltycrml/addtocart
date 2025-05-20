@@ -1,13 +1,17 @@
 import { createClient } from '@supabase/supabase-js'
 
-export function getSupabaseClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  if (!supabaseUrl || !supabaseKey) {
-    throw new Error('Supabase environment variables are not set.')
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true
   }
-  return createClient(supabaseUrl, supabaseKey)
-}
+})
+
+export const getSupabaseClient = () => supabase
 
 // Types for our database tables
 export type Product = {

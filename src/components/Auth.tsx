@@ -76,20 +76,6 @@ export function Auth() {
       
       if (signUpError) throw signUpError;
       
-      if (signUpData.user) {
-        // Create profile
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert([
-            {
-              id: signUpData.user.id,
-              full_name: data.fullName,
-            },
-          ]);
-
-        if (profileError) throw profileError;
-      }
-      
       toast({
         title: 'Success!',
         description: 'Check your email for the confirmation link.',

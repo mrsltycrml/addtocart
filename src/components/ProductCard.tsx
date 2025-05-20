@@ -37,9 +37,9 @@ export function ProductCard({ product }: ProductCardProps) {
       <Link href={`/products/${product.id}`} className="block" aria-label={`View details for ${product.name}`}>
         <CardHeader className="p-0 relative">
           <div className="relative w-full aspect-[16/10] bg-muted overflow-hidden rounded-t-xl">
-            {product.imageUrl ? (
+            {(product.imageUrl || product.image_url) ? (
               <Image
-                src={product.imageUrl}
+                src={product.imageUrl || product.image_url || ''}
                 alt={product.name}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

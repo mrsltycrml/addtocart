@@ -11,7 +11,21 @@ const nextConfig = {
       'storage-asset.msi.com',
       'm.media-amazon.com',
       'www.techstoreltd.com',
+      'www.savenearn.com.ph',
+      'savenearn.com.ph',
+      'picsum.photos',
+      'images.unsplash.com',
+      'cdn.shopify.com',
+      'lh3.googleusercontent.com',
+      'i.imgur.com',
+      'res.cloudinary.com',
       // Add more domains as needed
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
     ],
   },
 };
