@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase'
-import type { Product } from '@/lib/supabase'
+import { getAllProducts } from '@/data/products'
+import type { Product } from '@/lib/types'
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
@@ -14,35 +14,26 @@ export default function ProductsPage() {
   })
 
   useEffect(() => {
-    fetchProducts()
+    (async () => {
+      const freshProducts = await getAllProducts()
+      setProducts(freshProducts)
+    })()
   }, [])
 
   async function fetchProducts() {
-    const { data, error } = await supabase
-      .from('products')
-      .select('*')
-      .order('created_at', { ascending: false })
-
-    if (error) {
-      console.error('Error fetching products:', error)
-      return
-    }
-
-    setProducts(data || [])
+    const freshProducts = await getAllProducts()
+    setProducts(freshProducts)
   }
 
   async function addProduct(e: React.FormEvent) {
     e.preventDefault()
-    
-    const { error } = await supabase
-      .from('products')
-      .insert([newProduct])
-
+    const { error } = await import('@/lib/supabase').then(({ supabase }) =>
+      supabase.from('products').insert([newProduct])
+    )
     if (error) {
       console.error('Error adding product:', error)
       return
     }
-
     setNewProduct({
       name: '',
       description: '',
@@ -53,16 +44,13 @@ export default function ProductsPage() {
   }
 
   async function deleteProduct(id: string) {
-    const { error } = await supabase
-      .from('products')
-      .delete()
-      .eq('id', id)
-
+    const { error } = await import('@/lib/supabase').then(({ supabase }) =>
+      supabase.from('products').delete().eq('id', id)
+    )
     if (error) {
       console.error('Error deleting product:', error)
       return
     }
-
     fetchProducts()
   }
 
@@ -121,11 +109,13 @@ export default function ProductsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map((product) => (
           <div key={product.id} className="border rounded p-4">
-            <img
-              src={product.image_url}
-              alt={product.name}
-              className="w-full h-48 object-cover mb-4"
-            />
+            {product.imageUrl ? (
+              <img
+                src={product.imageUrl}
+                alt={product.name}
+                className="w-full h-48 object-cover mb-4"
+              />
+            ) : null}
             <h3 className="text-lg font-semibold">{product.name}</h3>
             <p className="text-gray-600 mb-2">{product.description}</p>
             <p className="text-lg font-bold">${product.price}</p>
