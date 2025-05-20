@@ -1,4 +1,3 @@
-
 'use client'; 
 
 import { useEffect, useState } from 'react';
@@ -9,7 +8,7 @@ import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartProvider';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ShoppingCart, AlertCircle, Star, MessageCircle, ShieldCheck, Truck } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, AlertCircle, Star, MessageCircle, ShieldCheck, Truck, Minus, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -47,8 +46,10 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     if (typeof id === 'string') {
-      const foundProduct = getProductById(id);
-      setProduct(foundProduct);
+      (async () => {
+        const foundProduct = await getProductById(id);
+        setProduct(foundProduct);
+      })();
     }
   }, [id]);
 
