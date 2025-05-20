@@ -55,7 +55,7 @@ export default function PurchaseHistoryPage() {
         </h1>
         <p className="text-muted-foreground mt-2 text-lg">Review your past orders.</p>
       </div>
-      
+
       {purchases.length === 0 ? (
         <Card className="shadow-lg rounded-xl border-border/70">
           <CardHeader className="items-center text-center py-10">
@@ -95,7 +95,7 @@ export default function PurchaseHistoryPage() {
                 <h4 className="font-semibold mb-3 text-lg text-muted-foreground">Items in this order:</h4>
                 <ul className="space-y-4">
                   <li className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-card rounded-lg border">
-                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-4">
                       <Link href={`/products/${purchase.product.id}`}>
                          <Image 
                            src={purchase.product.image_url} 
@@ -113,12 +113,12 @@ export default function PurchaseHistoryPage() {
                           <p className="text-sm text-muted-foreground">Category: {purchase.product.category}</p>
                         )}
                         <p className="text-sm text-muted-foreground">Qty: {purchase.quantity} · ${purchase.product.price.toFixed(2)} each</p>
+                        </div>
                       </div>
-                    </div>
-                    <p className="font-semibold text-base sm:text-lg text-primary mt-2 sm:mt-0 ml-auto sm:ml-0">
+                      <p className="font-semibold text-base sm:text-lg text-primary mt-2 sm:mt-0 ml-auto sm:ml-0">
                       ${(purchase.product.price * purchase.quantity).toFixed(2)}
-                    </p>
-                  </li>
+                      </p>
+                    </li>
                 </ul>
               </CardContent>
               <CardFooter className="p-5 border-t bg-muted/30 flex flex-col sm:flex-row justify-end gap-3">

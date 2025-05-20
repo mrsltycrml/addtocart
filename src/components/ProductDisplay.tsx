@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
@@ -16,8 +15,8 @@ export function ProductDisplay({ initialProducts }: ProductDisplayProps) {
   const router = useRouter();
   const pathname = usePathname();
   
+  // Only set initial value from URL once
   const initialSearchQuery = searchParams.get('q') || '';
-  
   const [searchTerm, setSearchTerm] = useState(initialSearchQuery);
   // Products state is mainly for potential future client-side fetching/filtering beyond search
   const [products, setProducts] = useState<Product[]>(initialProducts);
@@ -27,18 +26,9 @@ export function ProductDisplay({ initialProducts }: ProductDisplayProps) {
     setProducts(initialProducts);
   }, [initialProducts]);
 
-  // Effect to sync searchTerm state with URL query parameter 'q'
-  useEffect(() => {
-    const queryFromUrl = searchParams.get('q') || '';
-    if (queryFromUrl !== searchTerm) {
-      setSearchTerm(queryFromUrl);
-    }
-  }, [searchParams, searchTerm]);
-
   const handleSearch = useCallback((query: string) => {
     setSearchTerm(query);
-    // The SearchInput component now handles URL updates for search term 'q'
-    // This function primarily updates the local state for filtering
+    // The SearchInput component now handles URL updates itself
   }, []);
 
   const filteredProducts = useMemo(() => {
@@ -48,9 +38,9 @@ export function ProductDisplay({ initialProducts }: ProductDisplayProps) {
     }
     return products.filter(
       product =>
-        product.name.toLowerCase().includes(lowerCaseSearchTerm) ||
-        product.category.toLowerCase().includes(lowerCaseSearchTerm) ||
-        product.description.toLowerCase().includes(lowerCaseSearchTerm)
+        (product.name?.toLowerCase() ?? '').includes(lowerCaseSearchTerm) ||
+        (product.category?.toLowerCase() ?? '').includes(lowerCaseSearchTerm) ||
+        (product.description?.toLowerCase() ?? '').includes(lowerCaseSearchTerm)
     );
   }, [searchTerm, products]);
 

@@ -37,15 +37,21 @@ export function ProductCard({ product }: ProductCardProps) {
       <Link href={`/products/${product.id}`} className="block" aria-label={`View details for ${product.name}`}>
         <CardHeader className="p-0 relative">
           <div className="relative w-full aspect-[16/10] bg-muted overflow-hidden rounded-t-xl">
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-              data-ai-hint={product.dataAiHint}
-              priority={product.id === '1' || product.id === '2'} // Example: Prioritize first few images
-            />
+            {product.imageUrl ? (
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                data-ai-hint={product.dataAiHint}
+                priority={product.id === '1' || product.id === '2'}
+              />
+            ) : (
+              <div className="flex items-center justify-center w-full h-full bg-gray-200 text-gray-400 text-lg">
+                No Image
+              </div>
+            )}
           </div>
           <Badge variant="secondary" className="absolute top-3 right-3 capitalize">
             {product.category}

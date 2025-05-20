@@ -90,15 +90,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return [...prevItems, { ...product, quantity }];
       });
     } else {
-      setCartItems(prevItems => {
-        const existingItem = prevItems.find(item => item.id === product.id);
-        if (existingItem) {
-          return prevItems.map(item =>
-            item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
-          );
-        }
-        return [...prevItems, { ...product, quantity }];
-      });
+    setCartItems(prevItems => {
+      const existingItem = prevItems.find(item => item.id === product.id);
+      if (existingItem) {
+        return prevItems.map(item =>
+          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
+        );
+      }
+      return [...prevItems, { ...product, quantity }];
+    });
     }
   };
 
