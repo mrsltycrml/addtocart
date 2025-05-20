@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm install && npm run build",
-  "installCommand": "npm install --no-frozen-lockfile",
-  "framework": "nextjs"
+  "buildCommand": "NEXT_TELEMETRY_DISABLED=1 npm run build",
+  "installCommand": "npm ci",
+  "framework": "nextjs",
+  "outputDirectory": ".next"
 } 
