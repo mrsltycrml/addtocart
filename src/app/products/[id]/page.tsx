@@ -8,7 +8,7 @@ import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartProvider';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ShoppingCart, AlertCircle, Star, MessageCircle, ShieldCheck, Truck, Minus, Plus } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, AlertCircle, Star, MessageCircle, ShieldCheck, Truck } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -140,11 +140,11 @@ export default function ProductDetailPage() {
               <div className="flex items-center gap-3">
                 <span className="font-medium">Quantity:</span>
                 <Button variant="outline" size="icon" onClick={() => setQuantity(Math.max(1, quantity - 1))} disabled={quantity <= 1}>
-                  <Minus className="h-4 w-4" />
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /></svg>
                 </Button>
                 <span className="text-lg font-semibold w-10 text-center">{quantity}</span>
                 <Button variant="outline" size="icon" onClick={() => setQuantity(quantity + 1)}>
-                  <Plus className="h-4 w-4" />
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
                 </Button>
               </div>
 
