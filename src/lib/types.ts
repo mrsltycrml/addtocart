@@ -5,7 +5,7 @@ export interface Product {
   price: number;
   imageUrl: string;
   image_url?: string;
-  category: string;
+  category?: string;
   dataAiHint?: string;
 }
 

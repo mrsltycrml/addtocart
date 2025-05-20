@@ -18,8 +18,7 @@ export default function ProductsPage() {
     name: '',
     description: '',
     price: 0,
-    image_url: '',
-    category: 'Electronics' // Default category
+    image_url: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formVisible, setFormVisible] = useState(false)
@@ -70,8 +69,7 @@ export default function ProductsPage() {
         name: '',
         description: '',
         price: 0,
-        image_url: '',
-        category: 'Electronics'
+        image_url: ''
       })
       
       setFormVisible(false)
@@ -195,43 +193,23 @@ export default function ProductsPage() {
                     />
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-muted-foreground">Price ($)*</label>
-                      <div className="relative">
-                        <Input
-                          required
-                          type="number"
-                          step="0.01"
-                          min="0"
-                          placeholder="0.00"
-                          value={newProduct.price || ''}
-                          onChange={(e) => setNewProduct({ 
-                            ...newProduct, 
-                            price: e.target.value === '' ? 0 : parseFloat(e.target.value) 
-                          })}
-                          className="pl-10 bg-background/50 border-border/60 focus-visible:ring-primary"
-                        />
-                        <DollarSign className="w-5 h-5 absolute left-3 top-2.5 text-muted-foreground" />
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-muted-foreground">Category</label>
-                      <select
-                        value={newProduct.category}
-                        onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
-                        className="w-full h-10 px-3 py-2 rounded-md border border-border/60 bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary"
-                      >
-                        <option value="Electronics">Electronics</option>
-                        <option value="Accessories">Accessories</option>
-                        <option value="Peripherals">Peripherals</option>
-                        <option value="Computers">Computers</option>
-                        <option value="Monitors">Monitors</option>
-                        <option value="Audio">Audio</option>
-                        <option value="Smart Home">Smart Home</option>
-                        <option value="Other">Other</option>
-                      </select>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-muted-foreground">Price ($)*</label>
+                    <div className="relative">
+                      <Input
+                        required
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        placeholder="0.00"
+                        value={newProduct.price || ''}
+                        onChange={(e) => setNewProduct({ 
+                          ...newProduct, 
+                          price: e.target.value === '' ? 0 : parseFloat(e.target.value) 
+                        })}
+                        className="pl-10 bg-background/50 border-border/60 focus-visible:ring-primary"
+                      />
+                      <DollarSign className="w-5 h-5 absolute left-3 top-2.5 text-muted-foreground" />
                     </div>
                   </div>
                   
@@ -319,9 +297,11 @@ export default function ProductsPage() {
                         <Package className="w-16 h-16 text-muted-foreground/30" />
                       </div>
                     )}
-                    <div className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm text-primary text-xs font-medium py-1 px-2 rounded-full">
-                      {product.category || 'Uncategorized'}
-                    </div>
+                    {product.category && (
+                      <div className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm text-primary text-xs font-medium py-1 px-2 rounded-full">
+                        {product.category}
+                      </div>
+                    )}
                   </div>
                   
                   <CardContent className="flex-grow p-5">
