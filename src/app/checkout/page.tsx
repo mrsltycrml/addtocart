@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation'; // Import useRouter
 import { useToast } from '@/hooks/use-toast'; // Import useToast
 import { getSupabaseClient } from '@/lib/supabase';
+import { formatPrice } from '@/lib/utils';
 
 const supabase = getSupabaseClient();
 
@@ -204,7 +205,7 @@ export default function CheckoutPage() {
                             <p className="text-xs text-muted-foreground">Qty: {item.quantity}</p>
                         </div>
                     </div>
-                    <span className="font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                    <span className="font-semibold">{formatPrice(Number(item.price * item.quantity))}</span>
                   </div>
                 ))}
               </CardContent>
@@ -212,7 +213,7 @@ export default function CheckoutPage() {
               <CardContent className="space-y-3 pt-0">
                 <div className="flex justify-between text-muted-foreground">
                     <span>Subtotal</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>{formatPrice(Number(total))}</span>
                 </div>
                 <div className="flex justify-between text-muted-foreground">
                     <span>Shipping</span>
@@ -220,12 +221,12 @@ export default function CheckoutPage() {
                 </div>
                  <div className="flex justify-between text-muted-foreground">
                     <span>Taxes (Estimated)</span>
-                    <span>$0.00</span> 
+                    <span>{formatPrice(0)}</span> 
                 </div>
                 <Separator className="my-3" />
                 <div className="flex justify-between font-bold text-xl text-primary">
                   <span>Total Due</span>
-                  <span>${total.toFixed(2)}</span>
+                  <span>{formatPrice(Number(total))}</span>
                 </div>
               </CardContent>
               <CardFooter className="p-5 border-t border-border/40">

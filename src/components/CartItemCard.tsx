@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -9,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { useCart } from '@/context/CartProvider';
 import { Minus, Plus, Trash2, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { formatPrice } from '@/lib/utils';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -64,7 +64,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
         <Link href={`/products/${item.id}`} className="hover:text-primary transition-colors">
           <h3 className="font-semibold text-lg sm:text-xl">{item.name}</h3>
         </Link>
-        <p className="text-sm text-muted-foreground">Unit Price: ${item.price.toFixed(2)}</p>
+        <p className="text-sm text-muted-foreground">Unit Price: {formatPrice(Number(item.price))}</p>
       </div>
       <div className="flex items-center gap-2 my-3 sm:my-0">
         <Button
@@ -108,7 +108,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
         </Button>
       </div>
       <p className="font-bold text-lg sm:text-xl w-28 text-center sm:text-right text-primary">
-        ${(item.price * item.quantity).toFixed(2)}
+        {formatPrice(Number(item.price * item.quantity))}
       </p>
       
       <AlertDialog>

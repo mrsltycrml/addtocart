@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { History, ShoppingBag, ArrowLeft, PackageCheck, FileText, Download } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { formatPrice } from '@/lib/utils';
 
 type PurchaseWithProduct = PurchaseHistory & {
   product: Product
@@ -87,7 +88,7 @@ export default function PurchaseHistoryPage() {
                     </CardDescription>
                   </div>
                   <div className="text-left sm:text-right mt-2 sm:mt-0">
-                    <p className="text-xl sm:text-2xl font-bold mt-1.5 text-primary">${purchase.total_price.toFixed(2)}</p>
+                    <p className="text-xl sm:text-2xl font-bold mt-1.5 text-primary">{formatPrice(Number(purchase.total_price))}</p>
                   </div>
                 </div>
               </CardHeader>
@@ -112,11 +113,11 @@ export default function PurchaseHistoryPage() {
                         {purchase.product.category && (
                           <p className="text-sm text-muted-foreground">Category: {purchase.product.category}</p>
                         )}
-                        <p className="text-sm text-muted-foreground">Qty: {purchase.quantity} · ${purchase.product.price.toFixed(2)} each</p>
+                        <p className="text-sm text-muted-foreground">Qty: {purchase.quantity} · {formatPrice(Number(purchase.product.price))} each</p>
                         </div>
                       </div>
                       <p className="font-semibold text-base sm:text-lg text-primary mt-2 sm:mt-0 ml-auto sm:ml-0">
-                      ${(purchase.product.price * purchase.quantity).toFixed(2)}
+                      {formatPrice(Number(purchase.product.price * purchase.quantity))}
                       </p>
                     </li>
                 </ul>

@@ -9,6 +9,7 @@ import { useCart } from '@/context/CartProvider';
 import { ShoppingCart, Eye, Zap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
+import { formatPrice } from '@/lib/utils';
 
 interface ProductCardProps {
   product: Product;
@@ -71,7 +72,7 @@ export function ProductCard({ product }: ProductCardProps) {
         
         <div className="mt-auto">
           <p className="text-3xl font-extrabold text-primary mb-4">
-            ${product.price.toFixed(2)}
+            {formatPrice(Number(product.price))}
           </p>
         </div>
       </CardContent>

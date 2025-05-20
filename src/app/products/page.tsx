@@ -12,6 +12,14 @@ import Image from 'next/image'
 import { useToast } from '@/hooks/use-toast'
 import { motion, AnimatePresence } from 'framer-motion'
 
+// Function to format price with peso sign and commas
+const formatPrice = (price: number) => {
+  return `₱${price.toLocaleString('en-PH', { 
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })}`;
+};
+
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [newProduct, setNewProduct] = useState({
@@ -194,7 +202,7 @@ export default function ProductsPage() {
                   </div>
                   
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-muted-foreground">Price ($)*</label>
+                    <label className="text-sm font-medium text-muted-foreground">Price (₱)*</label>
                     <div className="relative">
                       <Input
                         required
@@ -209,7 +217,7 @@ export default function ProductsPage() {
                         })}
                         className="pl-10 bg-background/50 border-border/60 focus-visible:ring-primary"
                       />
-                      <DollarSign className="w-5 h-5 absolute left-3 top-2.5 text-muted-foreground" />
+                      <span className="absolute left-3 top-2.5 text-muted-foreground font-medium">₱</span>
                     </div>
                   </div>
                   
@@ -307,7 +315,7 @@ export default function ProductsPage() {
                   <CardContent className="flex-grow p-5">
                     <h3 className="text-xl font-semibold text-foreground line-clamp-1 mb-2">{product.name}</h3>
                     <p className="text-muted-foreground line-clamp-2 mb-3 text-sm">{product.description}</p>
-                    <p className="text-2xl font-bold text-primary">${Number(product.price).toFixed(2)}</p>
+                    <p className="text-2xl font-bold text-primary">{formatPrice(Number(product.price))}</p>
                   </CardContent>
                   
                   <CardFooter className="pt-0 pb-5 px-5">

@@ -14,6 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
+import { formatPrice } from '@/lib/utils';
 
 function ProductDetailSkeleton() {
   return (
@@ -115,7 +116,7 @@ export default function ProductDetailPage() {
             </CardHeader>
             <CardContent className="p-6 md:p-8 pt-0 space-y-5 flex-grow">
               <p className="text-4xl lg:text-5xl font-extrabold text-primary">
-                ${product.price.toFixed(2)}
+                {formatPrice(Number(product.price))}
               </p>
               <Separator />
               <div>
